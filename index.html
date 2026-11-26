@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8f6ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="Scanne tes repas et organise ton menu de la semaine.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css?v=9">
+<title>Assiette Sauge</title>
+</head>
+<body>
+<header class="masthead">
+  <div class="shell header-row">
+    <a href="#aujourdhui" class="brand"><span class="mark" data-icon="leaf"></span>Assiette <em>Sauge</em></a>
+    <nav aria-label="Navigation principale">
+      <a href="#aujourdhui" data-view="aujourdhui"><span data-icon="home"></span>Aujourd’hui</a>
+      <a href="#semaine" data-view="semaine"><span data-icon="calendar"></span>Ma semaine</a>
+      <a href="#scan" data-view="scan"><span data-icon="camera"></span>Scanner</a>
+      <a href="#journal" data-view="journal"><span data-icon="journal"></span>Journal</a>
+    </nav>
+    <a class="profile-link" href="#profil" aria-label="Mon profil" title="Mon profil"><span data-icon="profile"></span></a>
+  </div>
+</header>
+<main class="shell" id="app"></main>
+<footer class="shell footer"><span>Assiette Sauge</span><button id="install" class="text-button" type="button">Installer l’app</button></footer>
+<dialog id="dialog"><div id="dialog-content"></div><form method="dialog"><button class="button secondary">Fermer</button></form></dialog>
+<template id="scan-template">
+  <div class="page-heading"><p class="eyebrow">JOURNAL ALIMENTAIRE</p><h1>Scanner un <em>repas.</em></h1><p>Photographie ton assiette entière, si possible de dessus.</p></div>
+  <div class="scan-grid">
+    <section class="panel scan-panel">
+      <div class="photo-zone" id="photo-zone">
+        <span class="feature-icon" data-icon="camera"></span>
+        <p>Ajoute une photo de ton assiette</p>
+      </div>
+      <div class="actions">
+        <label class="button primary upload"><span data-icon="camera"></span>Prendre une photo<input type="file" accept="image/*" capture="environment" data-image></label>
+        <label class="button secondary upload">Choisir une image<input type="file" accept="image/*" data-image></label>
+      </div>
+      <p class="muted small" id="scan-status" role="status">L’analyse se fait sur ton appareil. Au premier scan, un téléchargement de 155 Mo est nécessaire.</p>
+      <div id="predictions"></div>
+    </section>
+    <form class="panel" id="meal-form">
+      <h2>Ton assiette</h2>
+      <p class="muted">Vérifie les aliments et les grammes avant d’enregistrer. Une photo donne une estimation. Ajoute les sauces et l’huile si besoin.</p>
+      <label>Nom du repas<input name="mealName" placeholder="Ex. Déjeuner maison" maxlength="70"></label>
+      <div id="food-rows"></div>
+      <button type="button" id="add-food" class="text-button"><span data-icon="plus"></span>Ajouter un aliment</button>
+      <div id="totals" class="nutrition" aria-live="polite"></div>
+      <button class="button primary" type="submit">Enregistrer dans le journal</button>
+    </form>
+  </div>
+</template>
+<script type="module" src="./app.mjs?v=9"></script>
+</body>
+</html>
